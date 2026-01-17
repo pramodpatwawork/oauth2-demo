@@ -22,3 +22,17 @@
 * Enter facebook login credentials
 * Select Continue as <your name>
 * You will be redirected to /hello page.
+
+## Extra points in sprin security
+
+* Bydefault is is cod grant in response_type variable value does go as code.
+* Spring securiy also supply a parameter with name state which it will expect in response along with code that is to protect it from crosssite request forgery attack.
+
+Here is a simple flow chart:
+
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
