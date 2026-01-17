@@ -1,0 +1,36 @@
+# Converted from application.properties
+# Keep this file if you prefer YAML-based Spring config
+# OAuth2 client configuration for Facebook
+# Replace the client-id and client-secret via environment variables or a secure secrets store.
+# Example (Windows cmd):
+#   setx FACEBOOK_CLIENT_ID "your-client-id"
+#   setx FACEBOOK_CLIENT_SECRET "your-client-secret"
+# The properties below read from the environment variables by default.
+spring:
+  application:
+    name: oauth2-demo
+  thymeleaf:
+    cache: false
+  security:
+    oauth2:
+      client:
+        registration:
+          facebook:
+            client-id: Facebook app Id
+            client-secret: facebook app secret
+            scope:
+              - public_profile
+              - email
+         #   client-name: Facebook
+            #  provider: facebook
+            #authorization-grant-type: authorization_code
+            #redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+              #scope:
+              #- public_profile
+            #- email
+          #provider:
+            #facebook:
+            #authorization-uri: https://www.facebook.com/v10.0/dialog/oauth
+            #token-uri: https://graph.facebook.com/v10.0/oauth/access_token
+            #user-info-uri: https://graph.facebook.com/me?fields=id,name,email
+            #user-name-attribute: id
