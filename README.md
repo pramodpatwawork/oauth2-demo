@@ -23,10 +23,10 @@
 * Select Continue as <your name>
 * You will be redirected to /hello page.
 
-## Extra points in sprin security
+## Extra points in Spring Security
 
-* Bydefault is is cod grant in response_type variable value does go as code.
-* Spring securiy also supply a parameter with name state which it will expect in response along with code that is to protect it from crosssite request forgery attack.
+* Bydefault is is code grant in response_type variable value does go as code.
+* Spring Security also supply a parameter with name state which it will expect in response along with code that is to protect it from crosssite request forgery attack.
 
 Facebook SSO code grant flow
 
@@ -37,10 +37,10 @@ sequenceDiagram
     participant FacebookSSO
     participant ApplicationAPI
     Browser->>API: Try to access welcome page <br/> http://localhost:8080/hello
-    API->>FacebookSSO: Spring security Redirect to FaceBookSSO URL <br/> https://www.facebook.com/v24.0/dialog/oauth?<br/>client_id={app-id}=<br/>&redirect_uri={redirect-uri}<br/>&state={state-param} 
+    API->>FacebookSSO: Spring security Redirect to FacebookSSO URL <br/> https://www.facebook.com/v24.0/dialog/oauth?<br/>client_id={app-id}=<br/>&redirect_uri={redirect-uri}<br/>&state={state-param} 
     FacebookSSO->>FacebookSSO: Ask for facebook login
     FacebookSSO->>API: redirects on application <br/>https://www.domain.com/login?<br/>state="{st=state123abc,ds=123456789}"
-    API->>FaceBookSSO: API call FacebookSSO to get access token <br/> GET https://graph.facebook.com/v24.0/oauth/access_token?<br/>client_id={app-id}<br/>&redirect_uri={redirect-uri}<br/>&client_secret={app-secret}<br/>&code={code-parameter}
-    FaceBookSSO->>API: return access token <br/> {"access_token": {access-token}, <br/> "token_type": {type},<br/>"expires_in":  {seconds-til-expiration}}
-    API->>FaceBookSSO: API call to get user info <br/> GET https://graph.facebook.com/me?<br/>fields=id,name,email<br/>&access_token={access-token}
+    API->>FacebookSSO: API call FacebookSSO to get access token <br/> GET https://graph.facebook.com/v24.0/oauth/access_token?<br/>client_id={app-id}<br/>&redirect_uri={redirect-uri}<br/>&client_secret={app-secret}<br/>&code={code-parameter}
+    FacebookSSO->>API: return access token <br/> {"access_token": {access-token}, <br/> "token_type": {type},<br/>"expires_in":  {seconds-til-expiration}}
+    API->>FacebookSSO: API call to get user info <br/> GET https://graph.facebook.com/me?<br/>fields=id,name,email<br/>&access_token={access-token}
     API->>UI: forward request to UI setting access token <br/> either on chrome local <br/> store or in http session
