@@ -28,11 +28,19 @@
 * Bydefault is is cod grant in response_type variable value does go as code.
 * Spring securiy also supply a parameter with name state which it will expect in response along with code that is to protect it from crosssite request forgery attack.
 
-Here is a simple flow chart:
+Facebook SSO code grant flow
 
 ```mermaid
-graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
+sequenceDiagram
+    participant Browser
+    participant UI
+    participant FacebookSSO
+    participant ApplicationAPI
+    Browser->>API: Try to access welcome page http://localhost:8080/hello
+    API->>FacebookSSO: Spring security Redirect to FaceBookSSO URL \n https://www.facebook.com/v24.0/dialog/oauth?\nclient_id={app-id}&redirect_uri={redirect-uri} &state={state-param} 
+    FacebookSSO->>FacebookSSO: Ask for facebook login
+    FacebookSSO->>API: redirects on application https://www.domain.com/login?state="{st=state123abc,ds=123456789}"
+    API->>FaceBookSSO: API call FacebookSSO to get access token GET https://graph.facebook.com/v24.0/oauth/access_token?\nclient_id={app-id}\n&redirect_uri={redirect-uri}\n&client_secret={app-secret}\n&code={code-parameter}
+    FaceBookSSO->>API: return access token {"access_token": {access-token}, "token_type": {type},"expires_in":  {seconds-til-expiration}}
+    API->>FaceBookSSO: API call to get user info GET https://graph.facebook.com/me?fields=id,name,email&access_token={access-token}
+    API->>UI: forward request to UI setting access token either on chrome local store or in http session
