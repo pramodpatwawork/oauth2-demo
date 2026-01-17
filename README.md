@@ -33,9 +33,9 @@ Facebook SSO code grant flow
 ```mermaid
 sequenceDiagram
     participant Browser
+    participant ApplicationAPI
     participant UI
     participant FacebookSSO
-    participant ApplicationAPI
     Browser->>ApplicationAPI: Try to access welcome page <br/> http://localhost:8080/hello
     ApplicationAPI->>FacebookSSO: Spring security Redirect to FacebookSSO URL <br/> https://www.facebook.com/v24.0/dialog/oauth?<br/>client_id={app-id}=<br/>&redirect_uri={redirect-uri}<br/>&state={state-param} 
     FacebookSSO->>FacebookSSO: Ask for facebook login
